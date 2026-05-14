@@ -16,14 +16,6 @@ A simple Scientific Calculator built using HTML, CSS, and JavaScript.
 - CSS
 - JavaScript
 
-## Project Structure
-
-scientific-calculator
-│
-├── index.html
-├── style.css
-└── script.js
-
 ## Run Project
 
 Open index.html in browser
