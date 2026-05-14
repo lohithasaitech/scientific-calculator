@@ -1,51 +1,180 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Lohitha Sai">
     <title>Scientific Calculator</title>
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* UI Designed by Lohitha Sai */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #202124;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .calc-wrapper {
+            background: #2b2d31;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            width: 300px;
+        }
+
+        #lohitha-screen {
+            width: 100%;
+            height: 60px;
+            background: #1e1f22;
+            border: none;
+            border-radius: 5px;
+            text-align: right;
+            padding: 10px;
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 15px 0;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: white;
+            background: #383a40;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            background: #4e5058;
+        }
+
+        .op-btn {
+            background: #f2a900;
+            font-weight: bold;
+        }
+
+        .op-btn:hover {
+            background: #d49400;
+        }
+
+        .fn-btn {
+            background: #4f545c;
+        }
+
+        .fn-btn:hover {
+            background: #686d73;
+        }
+
+        .clear-btn {
+            background: #da373c;
+            font-weight: bold;
+        }
+
+        .clear-btn:hover {
+            background: #a1282c;
+        }
+
+        .eq-btn {
+            background: #23a559;
+            font-weight: bold;
+        }
+
+        .eq-btn:hover {
+            background: #1d8a4a;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-
-<div class="calculator">
-
-    <input type="text" id="display" disabled>
-
-    <div class="buttons">
-
-        <button onclick="clearDisplay()">C</button>
-        <button onclick="deleteLast()">DEL</button>
-        <button onclick="appendValue('%')">%</button>
-        <button onclick="appendValue('/')">/</button>
-
-        <button onclick="appendValue('7')">7</button>
-        <button onclick="appendValue('8')">8</button>
-        <button onclick="appendValue('9')">9</button>
-        <button onclick="appendValue('*')">*</button>
-
-        <button onclick="appendValue('4')">4</button>
-        <button onclick="appendValue('5')">5</button>
-        <button onclick="appendValue('6')">6</button>
-        <button onclick="appendValue('-')">-</button>
-
-        <button onclick="appendValue('1')">1</button>
-        <button onclick="appendValue('2')">2</button>
-        <button onclick="appendValue('3')">3</button>
-        <button onclick="appendValue('+')">+</button>
-
-        <button onclick="appendValue('0')">0</button>
-        <button onclick="appendValue('.')">.</button>
-        <button onclick="calculate()">=</button>
-
-        <button onclick="squareRoot()">√</button>
-        <button onclick="square()">x²</button>
-        <button onclick="appendValue('(')">(</button>
-        <button onclick="appendValue(')')">)</button>
-
+    <div class="calc-wrapper">
+        <!-- Lohitha's calculator UI -->
+        <input type="text" id="lohitha-screen" disabled>
+        
+        <div class="keypad">
+            <button class="btn clear-btn" onclick="clearDisplay()">C</button>
+            <button class="btn fn-btn" onclick="addChar('%')">%</button>
+            <button class="btn fn-btn" onclick="calcSquareRoot()">√</button>
+            <button class="btn op-btn" onclick="addChar('/')">/</button>
+            
+            <button class="btn num-btn" onclick="addChar('7')">7</button>
+            <button class="btn num-btn" onclick="addChar('8')">8</button>
+            <button class="btn num-btn" onclick="addChar('9')">9</button>
+            <button class="btn op-btn" onclick="addChar('*')">*</button>
+            
+            <button class="btn num-btn" onclick="addChar('4')">4</button>
+            <button class="btn num-btn" onclick="addChar('5')">5</button>
+            <button class="btn num-btn" onclick="addChar('6')">6</button>
+            <button class="btn op-btn" onclick="addChar('-')">-</button>
+            
+            <button class="btn num-btn" onclick="addChar('1')">1</button>
+            <button class="btn num-btn" onclick="addChar('2')">2</button>
+            <button class="btn num-btn" onclick="addChar('3')">3</button>
+            <button class="btn op-btn" onclick="addChar('+')">+</button>
+            
+            <button class="btn num-btn" onclick="addChar('0')">0</button>
+            <button class="btn num-btn" onclick="addChar('.')">.</button>
+            <button class="btn fn-btn" onclick="addChar('**')">^</button>
+            <button class="btn eq-btn" onclick="calculateResult()">=</button>
+        </div>
     </div>
+    
+    <script>
+        // JS variables setup by Lohitha Sai
+        let lohithaScreen = document.getElementById("lohitha-screen");
 
-</div>
+        function addChar(character) {
+            lohithaScreen.value += character;
+        }
 
-<script src="script.js"></script>
+        function clearDisplay() {
+            lohithaScreen.value = "";
+        }
 
+        function calcSquareRoot() {
+            try {
+                let lohithaVal = eval(lohithaScreen.value);
+                if (lohithaVal >= 0) {
+                    lohithaScreen.value = Math.sqrt(lohithaVal);
+                } else {
+                    lohithaScreen.value = "Error"; // Negative values ki error
+                }
+            } catch (e) {
+                lohithaScreen.value = "Error";
+            }
+        }
+
+        function calculateResult() {
+            try {
+                // Final calculation logic
+                let finalResult = eval(lohithaScreen.value);
+                
+                if (finalResult === undefined) {
+                    lohithaScreen.value = "";
+                } else {
+                    lohithaScreen.value = finalResult;
+                }
+            } catch (err) {
+                console.log("Error vachindi:", err);
+                lohithaScreen.value = "Error";
+            }
+        }
+    </script>
 </body>
 </html>
