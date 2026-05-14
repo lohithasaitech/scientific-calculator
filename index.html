@@ -153,7 +153,7 @@
                 if (lohithaVal >= 0) {
                     lohithaScreen.value = Math.sqrt(lohithaVal);
                 } else {
-                    lohithaScreen.value = "Error"; // Negative values ki error
+                    lohithaScreen.value = "Error"; // Negative values error
                 }
             } catch (e) {
                 lohithaScreen.value = "Error";
@@ -171,7 +171,7 @@
                     lohithaScreen.value = finalResult;
                 }
             } catch (err) {
-                console.log("Error vachindi:", err);
+                console.log("Error coming:", err);
                 lohithaScreen.value = "Error";
             }
         }
